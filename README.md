@@ -1,1 +1,1 @@
-# Scrooge-stockdata
+# Vincit esitehtävä
