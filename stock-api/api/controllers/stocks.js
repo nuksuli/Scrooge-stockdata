@@ -3,7 +3,7 @@ const UTILS = require("../utils")
 
 module.exports = {
     getStockData: async (req, res) => {
-
+        console.log(req.query)
         let startYear = req.query.startYear
         let startMonth = req.query.startMonth
         let startDay = req.query.startDay
