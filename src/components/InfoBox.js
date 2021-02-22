@@ -2,19 +2,20 @@ import { Card, CardContent, CardHeader, makeStyles, Typography } from "@material
 import ReactLoading from 'react-loading'
 const useStyles = makeStyles(() => ({
     root: {
-        display: 'table-cell',
         height: '100%',
         width: '100%'
     },
     loading: {
         margin: '5% auto auto auto'
+    },
+    box: {
+        margin: "5%"
     }
 }))
 const InfoBox = ({ streakArray, loading, orderedArray }) => {
     let renderInfoBox = null
     let renderArrayBox = null
     const classes = useStyles()
-    console.log(orderedArray)
     if (loading) {
         renderArrayBox = null
     }
@@ -23,11 +24,11 @@ const InfoBox = ({ streakArray, loading, orderedArray }) => {
     }
     else {
         renderArrayBox = (
-            <Card>
+            <Card className={classes.box}>
                 <CardHeader>Ordered list (date, volume, price change)</CardHeader>
                 {orderedArray.map(d => (
-                    <CardContent>
-                        {d[0]} volume: {d[2]} change: {d[6]}
+                    <CardContent key={d[0]}>
+                        {d[0]} volume: {d[2]} change: {d[6]} $
                     </CardContent>
                 ))}
             </Card>
@@ -45,7 +46,7 @@ const InfoBox = ({ streakArray, loading, orderedArray }) => {
     }
     else if (streakArray[2] === undefined) {
         renderInfoBox = (
-            <Card>
+            <Card className={classes.box}>
                 <CardContent>
                     <Typography>
                         There was no bullish bitween the given days
@@ -56,7 +57,7 @@ const InfoBox = ({ streakArray, loading, orderedArray }) => {
     }
     else if (streakArray) {
         renderInfoBox = (
-            <Card>
+            <Card className={classes.box}>
                 <CardContent>
                     <Typography>
                         Longest bullish bitween given days was {streakArray[2]}

@@ -4,9 +4,10 @@ import Calendar from 'react-calendar'
 import "react-calendar/dist/Calendar.css"
 import Axios from 'axios'
 import { readString } from 'react-papaparse'
-import { getLongestStreak, getOrderedArray } from './utils';
+import { getLongestStreak, getOrderedArray, getSma5 } from './utils';
 import moment from "moment-business-days"
 import InfoBox from "./InfoBox"
+import { Sma5 } from './Sma5';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -50,7 +51,7 @@ export const Content = () => {
     const getStockData = async () => {
         setLoading(true)
         try {
-            //getting 5 days before for SMA
+            //getting 5 days before for SMA5
             const fixedStartDate = moment(startDate).businessSubtract(5).toDate()
             const response = await Axios({
                 method: "get",
@@ -60,7 +61,7 @@ export const Content = () => {
                 const responseData = response.data
                 const results = await readString(responseData.data)
                 setStockData(results.data)
-                console.log(getOrderedArray({ stockData }))
+                getSma5({ stockData })
             }
             else {
                 console.log(response)
@@ -103,6 +104,12 @@ export const Content = () => {
                     </option>
                     </TextField>
                 </form>
+                <Sma5
+                    loading={loading}
+                    sma5Array={getSma5({ stockData })}
+                >
+
+                </Sma5>
             </div>
             <InfoBox
                 streakArray={getLongestStreak({ stockData })}
