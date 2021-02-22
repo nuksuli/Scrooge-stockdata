@@ -1,12 +1,12 @@
 import React from 'react';
-import { LeftCol } from './components/LeftCol'
+import { Content } from './components/Content'
 
 function App() {
   return (
     <div>
-      <LeftCol>
+      <Content>
 
-      </LeftCol>
+      </Content>
     </div>
   );
 }

@@ -4,17 +4,19 @@ import Calendar from 'react-calendar'
 import "react-calendar/dist/Calendar.css"
 import Axios from 'axios'
 import { readString } from 'react-papaparse'
-import { getLongestStreak } from './utils';
+import { getLongestStreak, getOrderedArray } from './utils';
 import moment from "moment-business-days"
 import InfoBox from "./InfoBox"
 
 const useStyles = makeStyles(() => ({
     root: {
-        display: 'inline-block',
+        display: 'flex',
+        justifyContent: 'center'
+    },
+    calendar: {
         backgroundColor: 'white',
         textAlign: 'center',
-        padding: "1%",
-        border: "2px solid black",
+        padding: "1%"
     },
     input: {
         marginTop: "2%",
@@ -25,7 +27,7 @@ const useStyles = makeStyles(() => ({
         width: '40%'
     }
 }))
-export const LeftCol = () => {
+export const Content = () => {
     const classes = useStyles();
     const [company, setCompany] = useState('Apple')
     const [startDate, setStartDate] = useState(new Date())
@@ -56,9 +58,9 @@ export const LeftCol = () => {
             })
             if (response.status === 200) {
                 const responseData = response.data
-                const results = readString(responseData.data)
+                const results = await readString(responseData.data)
                 setStockData(results.data)
-                setStreakArray(getLongestStreak({ stockData }))
+                console.log(getOrderedArray({ stockData }))
             }
             else {
                 console.log(response)
@@ -77,8 +79,8 @@ export const LeftCol = () => {
     }
 
     return (
-        <div>
-            <div className={classes.root}>
+        <div className={classes.root}>
+            <div className={classes.calendar}>
                 <form>
                     <Calendar
                         className="react-calendar"
@@ -103,8 +105,9 @@ export const LeftCol = () => {
                 </form>
             </div>
             <InfoBox
-                streakArray={streakArray}
+                streakArray={getLongestStreak({ stockData })}
                 loading={loading}
+                orderedArray={getOrderedArray({ stockData })}
             />
         </div>
     )
