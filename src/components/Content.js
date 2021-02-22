@@ -54,7 +54,7 @@ export const Content = () => {
             const fixedStartDate = moment(startDate).businessSubtract(5).toDate()
             const response = await Axios({
                 method: "get",
-                url: `http://localhost:8000/stocks?startYear=${fixedStartDate.getFullYear()}&startMonth=${fixedStartDate.getMonth() + 1}&startDay=${fixedStartDate.getDate()}&endYear=${endDate.getFullYear()}&endMonth=${endDate.getMonth() + 1}&endDay=${endDate.getDate()}&company=${company}`
+                url: `${process.env.API_URL}stocks?startYear=${fixedStartDate.getFullYear()}&startMonth=${fixedStartDate.getMonth() + 1}&startDay=${fixedStartDate.getDate()}&endYear=${endDate.getFullYear()}&endMonth=${endDate.getMonth() + 1}&endDay=${endDate.getDate()}&company=${company}`
             })
             if (response.status === 200) {
                 const responseData = response.data

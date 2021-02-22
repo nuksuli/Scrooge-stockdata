@@ -14,11 +14,11 @@ module.exports = {
 
         console.log(startDay, startMonth, startYear, endYear, endMonth, endDay)
         const parsedDates = UTILS.parseDate(startYear, startMonth, startDay, endYear, endMonth, endDay)
-        console.log(`https://www.nasdaq.com/api/v1/historical/${company}/stocks/${parsedDates.start.year}-${parsedDates.start.month}-${parsedDates.start.day}/${parsedDates.end.year}-${parsedDates.end.month}-${parsedDates.end.day}`)
+        console.log(`${process.env.NASDAQ_URL}${company}/stocks/${parsedDates.start.year}-${parsedDates.start.month}-${parsedDates.start.day}/${parsedDates.end.year}-${parsedDates.end.month}-${parsedDates.end.day}`)
         try {
 
             request({
-                uri: `https://www.nasdaq.com/api/v1/historical/${company}/stocks/${parsedDates.start.year}-${parsedDates.start.month}-${parsedDates.start.day}/${parsedDates.end.year}-${parsedDates.end.month}-${parsedDates.end.day}`,
+                uri: `${process.env.NASDAQ_URL}${company}/stocks/${parsedDates.start.year}-${parsedDates.start.month}-${parsedDates.start.day}/${parsedDates.end.year}-${parsedDates.end.month}-${parsedDates.end.day}`,
                 method: 'GET',
                 headers: {
                     'Accept': 'application/csv',
