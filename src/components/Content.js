@@ -4,7 +4,7 @@ import Calendar from 'react-calendar'
 import "react-calendar/dist/Calendar.css"
 import Axios from 'axios'
 import { readString } from 'react-papaparse'
-import { getLongestStreak, getOrderedArray, getSma5 } from './utils';
+import * as UTILS from './utils';
 import moment from "moment-business-days"
 import InfoBox from "./InfoBox"
 import { Sma5 } from './Sma5';
@@ -60,7 +60,6 @@ export const Content = () => {
                 const responseData = response.data
                 const results = await readString(responseData.data)
                 setStockData(results.data)
-                getSma5({ stockData })
             }
             else {
                 console.log(response)
@@ -105,15 +104,15 @@ export const Content = () => {
                 </form>
                 <Sma5
                     loading={loading}
-                    sma5Array={getSma5({ stockData })}
+                    sma5Array={UTILS.getSma5({ stockData })}
                 >
 
                 </Sma5>
             </div>
             <InfoBox
-                streakArray={getLongestStreak({ stockData })}
+                streakArray={UTILS.getLongestStreak({ stockData })}
                 loading={loading}
-                orderedArray={getOrderedArray({ stockData })}
+                orderedArray={UTILS.getOrderedArray({ stockData })}
             />
         </div>
     )

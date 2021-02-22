@@ -25,10 +25,9 @@ const InfoBox = ({ streakArray, loading, orderedArray }) => {
     else {
         renderArrayBox = (
             <Card className={classes.box}>
-                <CardHeader>Ordered list (date, volume, price change)</CardHeader>
                 {orderedArray.map(d => (
                     <CardContent key={d[0]}>
-                        {d[0]} volume: {d[2]} change: {d[6]} $
+                        {`${d[0]} volume: ${d[2]} change: ${d[6]} $`}
                     </CardContent>
                 ))}
             </Card>
@@ -49,8 +48,8 @@ const InfoBox = ({ streakArray, loading, orderedArray }) => {
             <Card className={classes.box}>
                 <CardContent>
                     <Typography>
-                        There was no bullish bitween the given days
-                </Typography>
+                        {`There was no bullish bitween the given days`}
+                    </Typography>
                 </CardContent>
             </Card>
         )
@@ -60,13 +59,13 @@ const InfoBox = ({ streakArray, loading, orderedArray }) => {
             <Card className={classes.box}>
                 <CardContent>
                     <Typography>
-                        Longest bullish bitween given days was {streakArray[2]}
+                        {`Longest bullish bitween given days was ${streakArray[2]}`}
                     </Typography>
                     <Typography>
-                        Starting from {streakArray[1][0]}
+                        {`Starting from ${streakArray[1][0]}`}
                     </Typography>
                     <Typography>
-                        And ending at {streakArray[0][0]}
+                        {`And ending at {streakArray[0][0]}`}
                     </Typography>
                 </CardContent>
             </Card>
