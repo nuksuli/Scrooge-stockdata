@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, makeStyles, Typography } from "@material-ui/core"
+import { Card, CardContent } from "@material-ui/core"
 
 export const Sma5 = ({ sma5Array, loading }) => {
     let renderSmaData = null

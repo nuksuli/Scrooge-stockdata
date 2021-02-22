@@ -35,7 +35,6 @@ export const Content = () => {
     const [endDate, setEndDate] = useState(new Date())
     const [stockData, setStockData] = useState([])
     const [isMount, setIsMount] = useState(true)
-    const [streakArray, setStreakArray] = useState([])
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -86,7 +85,7 @@ export const Content = () => {
                     <Calendar
                         className="react-calendar"
                         maxDate={moment().toDate()}
-                        activeStartDate={moment().startOf('isoWeek').toDate()}
+                        defaultActiveStartDate={moment().startOf('isoWeek').toDate()}
                         selectRange
                         onChange={handleDateChange}
                     />

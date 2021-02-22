@@ -19,7 +19,7 @@ const InfoBox = ({ streakArray, loading, orderedArray }) => {
     if (loading) {
         renderArrayBox = null
     }
-    else if (!orderedArray) {
+    else if (orderedArray.length === 0) {
         renderArrayBox = null
     }
     else {
