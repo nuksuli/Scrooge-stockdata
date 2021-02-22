@@ -30,13 +30,13 @@ const useStyles = makeStyles(() => ({
 }))
 export const Content = () => {
     const classes = useStyles();
-    const [company, setCompany] = useState('Apple')
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
     const [stockData, setStockData] = useState([])
     const [isMount, setIsMount] = useState(true)
     const [loading, setLoading] = useState(false)
-    const companies = ["AAPL", "AMZN"]
+    const companies = ["AAPL", "AMZN", "AMD", "TSLA", "MSFT"]
+    const [company, setCompany] = useState(companies[0])
     useEffect(() => {
         if (startDate && endDate && !isMount) {
             getStockData()
@@ -54,7 +54,7 @@ export const Content = () => {
             const fixedStartDate = moment(startDate).businessSubtract(5).toDate()
             const response = await Axios({
                 method: "get",
-                url: `${process.env.API_URL}stocks?startYear=${fixedStartDate.getFullYear()}&startMonth=${fixedStartDate.getMonth() + 1}&startDay=${fixedStartDate.getDate()}&endYear=${endDate.getFullYear()}&endMonth=${endDate.getMonth() + 1}&endDay=${endDate.getDate()}&company=${company}`
+                url: `${process.env.REACT_APP_API_URL}stocks?startYear=${fixedStartDate.getFullYear()}&startMonth=${fixedStartDate.getMonth() + 1}&startDay=${fixedStartDate.getDate()}&endYear=${endDate.getFullYear()}&endMonth=${endDate.getMonth() + 1}&endDay=${endDate.getDate()}&company=${company}`
             })
             if (response.status === 200) {
                 const responseData = response.data
