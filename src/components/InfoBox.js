@@ -25,6 +25,7 @@ const InfoBox = ({ streakArray, loading, orderedArray }) => {
     else {
         renderArrayBox = (
             <Card className={classes.box}>
+                <Typography>{`Ordered list (date, volume, price change)`}</Typography>
                 {orderedArray.map(d => (
                     <CardContent key={d[0]}>
                         {`${d[0]} volume: ${d[2]} change: ${d[6]} $`}
@@ -65,7 +66,7 @@ const InfoBox = ({ streakArray, loading, orderedArray }) => {
                         {`Starting from ${streakArray[1][0]}`}
                     </Typography>
                     <Typography>
-                        {`And ending at {streakArray[0][0]}`}
+                        {`And ending at ${streakArray[0][0]}`}
                     </Typography>
                 </CardContent>
             </Card>

@@ -8,9 +8,10 @@ export const Sma5 = ({ sma5Array, loading }) => {
     else {
         renderSmaData = (
             <Card>
+                <CardContent>{`Date and difference to SMA5`}</CardContent>
                 {sma5Array.map(d => (
                     <CardContent key={d[0]}>
-                        {d[0]} change: {d[7]} $
+                        {d[0]} change: {d[7]} %
                     </CardContent>
                 ))}
             </Card>

@@ -10,14 +10,15 @@ module.exports = {
         let endYear = req.query.endYear
         let endMonth = req.query.endMonth
         let endDay = req.query.endDay
+        let company = req.query.company
 
         console.log(startDay, startMonth, startYear, endYear, endMonth, endDay)
         const parsedDates = UTILS.parseDate(startYear, startMonth, startDay, endYear, endMonth, endDay)
-        console.log(`https://www.nasdaq.com/api/v1/historical/AAPL/stocks/${parsedDates.start.year}-${parsedDates.start.month}-${parsedDates.start.day}/${parsedDates.end.year}-${parsedDates.end.month}-${parsedDates.end.day}`)
+        console.log(`https://www.nasdaq.com/api/v1/historical/${company}/stocks/${parsedDates.start.year}-${parsedDates.start.month}-${parsedDates.start.day}/${parsedDates.end.year}-${parsedDates.end.month}-${parsedDates.end.day}`)
         try {
 
             request({
-                uri: `https://www.nasdaq.com/api/v1/historical/AAPL/stocks/${parsedDates.start.year}-${parsedDates.start.month}-${parsedDates.start.day}/${parsedDates.end.year}-${parsedDates.end.month}-${parsedDates.end.day}`,
+                uri: `https://www.nasdaq.com/api/v1/historical/${company}/stocks/${parsedDates.start.year}-${parsedDates.start.month}-${parsedDates.start.day}/${parsedDates.end.year}-${parsedDates.end.month}-${parsedDates.end.day}`,
                 method: 'GET',
                 headers: {
                     'Accept': 'application/csv',

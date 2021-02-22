@@ -36,7 +36,7 @@ export const Content = () => {
     const [stockData, setStockData] = useState([])
     const [isMount, setIsMount] = useState(true)
     const [loading, setLoading] = useState(false)
-
+    const companies = ["AAPL", "AMZN"]
     useEffect(() => {
         if (startDate && endDate && !isMount) {
             getStockData()
@@ -54,7 +54,7 @@ export const Content = () => {
             const fixedStartDate = moment(startDate).businessSubtract(5).toDate()
             const response = await Axios({
                 method: "get",
-                url: `http://localhost:8000/stocks?startYear=${fixedStartDate.getFullYear()}&startMonth=${fixedStartDate.getMonth() + 1}&startDay=${fixedStartDate.getDate()}&endYear=${endDate.getFullYear()}&endMonth=${endDate.getMonth() + 1}&endDay=${endDate.getDate()}`
+                url: `http://localhost:8000/stocks?startYear=${fixedStartDate.getFullYear()}&startMonth=${fixedStartDate.getMonth() + 1}&startDay=${fixedStartDate.getDate()}&endYear=${endDate.getFullYear()}&endMonth=${endDate.getMonth() + 1}&endDay=${endDate.getDate()}&company=${company}`
             })
             if (response.status === 200) {
                 const responseData = response.data
@@ -63,6 +63,7 @@ export const Content = () => {
             }
             else {
                 console.log(response)
+                setStockData([])
             }
             setLoading(false)
         } catch (err) {
@@ -77,6 +78,10 @@ export const Content = () => {
         setEndDate(date[1])
     }
 
+    const handleCompanyChange = (event) => {
+        event.preventDefault()
+        setCompany(event.target.value)
+    }
     return (
         <div className={classes.root}>
             <div className={classes.calendar}>
@@ -93,13 +98,14 @@ export const Content = () => {
                         label="Select company"
                         select
                         value={company}
+                        onChange={handleCompanyChange}
                         SelectProps={{
                             native: true,
                         }}
                     >
-                        <option>
-                            AAPL
-                    </option>
+                        {companies.map(c =>
+                            <option key={c}>{c}</option>
+                        )}
                     </TextField>
                 </form>
                 <Sma5
