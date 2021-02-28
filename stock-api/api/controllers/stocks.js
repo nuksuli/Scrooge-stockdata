@@ -28,8 +28,12 @@ module.exports = {
                 }
             },
                 function (error, response, body) {
-                    console.log(body)
                     if (body === "\n") {
+                        res.status(502).json({
+                            message: "Failed to fetch the data"
+                        })
+                    }
+                    else if (/<(?=.*? .*?\/ ?>|br|hr|input|!--|wbr)[a-z]+.*?>|<([a-z]+).*?<\/\1>/i.test(body)) {
                         res.status(502).json({
                             message: "Failed to fetch the data"
                         })
